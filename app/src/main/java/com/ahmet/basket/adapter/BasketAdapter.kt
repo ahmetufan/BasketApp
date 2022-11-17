@@ -26,24 +26,26 @@ class BasketAdapter (val basketList:List<Product>, var viewmodel:HomeViewModel):
         holder.binding.rowPrice.text=basketList[position].price
         holder.binding.rowCountText.text=basketList[position].count.toString()
 
+        holder.binding.rowRemove.setOnClickListener {
+            val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
+            viewmodel.deleteProductBasket(product)
+        }
+
         holder.binding.textNegative.setOnClickListener {
             if (holder.binding.rowCountText.text.toString().toInt() > 1) {
                 holder.binding.rowCountText.text= (holder.binding.rowCountText.text.toString().toInt() -1).toString()
-                val product:Product
-                product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
+                val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
                 viewmodel.negatifBasket(product)
 
             } else {
-                val product:Product
-                product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
+                val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
                 viewmodel.deleteProductBasket(product)
             }
         }
 
         holder.binding.textPositive.setOnClickListener {
             holder.binding.rowCountText.text=(holder.binding.rowCountText.text.toString().toInt() +1).toString()
-            val product:Product
-            product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
+            val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
             viewmodel.addToBasket(product)
         }
 

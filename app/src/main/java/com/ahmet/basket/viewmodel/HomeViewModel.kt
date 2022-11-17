@@ -1,7 +1,11 @@
 package com.ahmet.basket.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ahmet.basket.models.Post
+import com.ahmet.basket.models.PostCevap
 import com.ahmet.basket.models.Product
 import com.ahmet.basket.retrofit.ApiServiceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -9,6 +13,10 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.ArrayList
 import javax.inject.Inject
 
@@ -21,6 +29,8 @@ class HomeViewModel @Inject constructor(private val repository : ApiServiceRepos
     val data= MutableLiveData<List<Product>>()
     val basket= MutableLiveData<List<Product>>()
     val totalBasket=MutableLiveData<Double>()
+
+    val myResponse=MutableLiveData<Response<PostCevap>>()
 
 
 
@@ -47,6 +57,15 @@ class HomeViewModel @Inject constructor(private val repository : ApiServiceRepos
                 })
         )
     }
+
+
+    suspend fun pushPost(post: List<Post>) {
+        viewModelScope.launch {
+            val response=repository.pushPost(post)
+            myResponse.value=response
+        }
+    }
+
 
     fun negatifBasket(product: Product){
 
