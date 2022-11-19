@@ -27,26 +27,29 @@ class BasketAdapter (val basketList:List<Product>, var viewmodel:HomeViewModel):
         holder.binding.rowCountText.text=basketList[position].count.toString()
 
         holder.binding.rowRemove.setOnClickListener {
-            val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
-            viewmodel.deleteProductBasket(product)
+            basketList.forEach {
+                viewmodel.deleteProductBasket(it)
+            }
         }
 
         holder.binding.textNegative.setOnClickListener {
             if (holder.binding.rowCountText.text.toString().toInt() > 1) {
                 holder.binding.rowCountText.text= (holder.binding.rowCountText.text.toString().toInt() -1).toString()
-                val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
-                viewmodel.negatifBasket(product)
+                basketList.forEach {
+                    viewmodel.negatifBasket(it) }
 
             } else {
-                val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
-                viewmodel.deleteProductBasket(product)
+                basketList.forEach {
+                    viewmodel.deleteProductBasket(it)
+                }
             }
         }
 
         holder.binding.textPositive.setOnClickListener {
             holder.binding.rowCountText.text=(holder.binding.rowCountText.text.toString().toInt() +1).toString()
-            val product= Product(basketList[position].id,basketList[position].name,basketList[position].price,basketList[position].currency,basketList[position].image)
-            viewmodel.addToBasket(product)
+            basketList.forEach {
+                viewmodel.addToBasket(it)
+            }
         }
 
 

@@ -40,6 +40,11 @@ class HomeAdapter(private val list:ArrayList<Product>, private val listener:List
             Navigation.findNavController(it).navigate(action)
         }
 
+        holder.binding.imageRow.setOnClickListener {
+            val action2=HomeFragmentDirections.actionHomeFragmentToBasketDetayFragment(list[position])
+            Navigation.findNavController(it).navigate(action2)
+        }
+
 
     }
 

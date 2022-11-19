@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_basketFragment"
             app:destination="@id/basketFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_basketDetayFragment"
+            app:destination="@id/basketDetayFragment" />
     </fragment>
     <fragment
         android:id="@+id/basketFragment"
@@ -22,5 +25,17 @@
         <action
             android:id="@+id/action_basketFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/basketDetayFragment"
+        android:name="com.ahmet.basket.ui.BasketDetayFragment"
+        android:label="fragment_basket_detay"
+        tools:layout="@layout/fragment_basket_detay" >
+        <action
+            android:id="@+id/action_basketDetayFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="basketDetay"
+            app:argType="com.ahmet.basket.models.Product" />
     </fragment>
 </navigation>
