@@ -30,8 +30,7 @@ class HomeViewModel @Inject constructor(private val repository : ApiServiceRepos
     val basket= MutableLiveData<List<Product>>()
     val totalBasket=MutableLiveData<Double>()
 
-    val myResponse=MutableLiveData<Response<PostCevap>>()
-
+    val myResponse=MutableLiveData<Response<PostCevap>?>()
 
 
     fun getData(){

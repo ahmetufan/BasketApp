@@ -65,7 +65,8 @@ class BasketFragment : Fragment() {
 
 
     }
-    private fun placeOrder(){
+
+    private fun placeOrder() {
 
         binding.buttonPlace.setOnClickListener {
 
@@ -108,26 +109,26 @@ class BasketFragment : Fragment() {
 
         viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
 
-            if (response.isSuccessful) {
+            if (response != null) {
 
-                Toast.makeText(context, "Siparişiniz alındı", Toast.LENGTH_SHORT).show()
-                Log.e("Tagstatus", response.body()?.status ?: "gelmedi")
+                if (response.isSuccessful) {
 
-            } else {
+                    Toast.makeText(context, "Siparişiniz alındı", Toast.LENGTH_SHORT).show()
+                    Log.e("Tagstatus", response.body()?.status ?: "gelmedi")
 
-                val jsonObj = JSONObject(response.errorBody()!!.source().buffer?.snapshot()?.utf8().toString())
-                Toast.makeText(context, jsonObj.toString(), Toast.LENGTH_SHORT).show()
+                } else {
 
-                Log.e("TAGerror",jsonObj.toString())
+                    val jsonObj = JSONObject(
+                        response.errorBody()!!.source().buffer?.snapshot()?.utf8().toString()
+                    )
+                    Toast.makeText(context, jsonObj.toString(), Toast.LENGTH_SHORT).show()
 
+                    Log.e("TAGerror", jsonObj.toString())
+
+                }
+                viewModel.myResponse.value = null
             }
-
         })
-
-
-
-
-
     }
 
 }
