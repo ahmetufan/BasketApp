@@ -65,6 +65,7 @@ class HomeFragment : Fragment(), Listener {
         })
     }
 
+
     private fun initRecycler() {
 
         binding.recyclerView.layoutManager=GridLayoutManager(requireContext(),2)

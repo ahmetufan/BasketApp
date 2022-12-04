@@ -24,8 +24,6 @@ class BasketDetayFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val gelenVeri by navArgs<BasketDetayFragmentArgs>()
-    private val viewModel: HomeViewModel by activityViewModels()
-    private var basketList: List<Product> = listOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
